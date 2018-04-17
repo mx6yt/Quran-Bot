@@ -12,7 +12,7 @@ if (message.content.startsWith(prefix + 'report')) {
       let user = message.mentions.users.first();
       let reason = args.slice(1).join(' ');
       let modlog = client.channels.find('name', 'report');
-        if (message.mentions.users.size < 1) return message.reply('**يجب عليك عمل منشن للعضو المراد الابلاغ عليه**').catch(console.error);
+        if (!message.mentions.users.size < 1) return message.reply('**يجب عليك عمل منشن للعضو المراد الابلاغ عليه**').catch(console.error);
 
   if (!modlog) return message.reply('**لا يوجد روم بأسم report**');
   const embed = new Discord.RichEmbed()
