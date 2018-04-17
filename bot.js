@@ -30,11 +30,11 @@ function clean(text) {
   else
     return text;
 }
-});
+
 client.on("message", message => {
     var prefix = "-";
   let args = message.content.split(" ").slice(1);
-if (message.content.startsWith((prefix) + 'report')) {
+if (message.content.startsWith(prefix + 'report')) {
       let user = message.mentions.users.first();
       let reason = args.slice(1).join(' ');
       let modlog = client.channels.find('name', 'report');
