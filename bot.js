@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const Fortnite = require('fortnite');
 const stats = new Fortnite(process.env.TRN);
 
@@ -10,7 +9,7 @@ client.on('ready', () => {
 });
 
 
-client.on('ready',() => {
+exports.run = (client, message, args, tools) => {
 
   let platform;
   let username;
