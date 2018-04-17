@@ -24,6 +24,12 @@ client.on('message', message => {
     }
   }
 });
+function clean(text) {
+  if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  else
+    return text;
+}
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
