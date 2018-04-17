@@ -19,7 +19,7 @@ if (message.content.startsWith(prefix + 'report')) {
     .setColor(0x00AE86)
     .setTimestamp()
     .addField('نوع الرسالة:', 'Report')
-    .addField('المراد الابلاغ عليه:', `${user.username}#${user.discriminator} (${user.id}`)
+    .addField('المراد الابلاغ عليه:', `${user.username}#${user.discriminator} (${user.id})`)
     .addField('صاحب الابلاغ:', `${message.author.username}#${message.author.discriminator}`)
     .addField('السبب', reason);
     message.delete()
