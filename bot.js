@@ -5,32 +5,6 @@ client.on('ready', () => {
     console.log('I am ready!');
 });
 
-client.on('message', message => {
-  if(message.author.id !== "349616310734553088") return;
-  const prefix = "-";
-  const args = message.content.split(" ").slice(1);
-
-  if (message.content.startsWith(prefix + "eval")) {
-    try {
-      var code = args.join(" ");
-      var evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.sendCode("xl", clean(evaled));
-    } catch (err) {
-      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
-  }
-});
-function clean(text) {
-  if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-  else
-    return text;
-}
-
 client.on("message", message => {
     var prefix = "-";
   let args = message.content.split(" ").slice(1);
@@ -38,7 +12,6 @@ if (message.content.startsWith(prefix + 'report')) {
       let user = message.mentions.users.first();
       let reason = args.slice(1).join(' ');
       let modlog = client.channels.find('name', 'report');
-      if (!reason) return message.reply('**ضع سبباً مقنعاً**');
         if (message.mentions.users.size < 1) return message.reply('**يجب عليك عمل منشن للعضو المراد الابلاغ عليه**').catch(console.error);
 
   if (!modlog) return message.reply('**لا يوجد روم بأسم report**');
