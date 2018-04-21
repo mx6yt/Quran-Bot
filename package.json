@@ -10,4 +10,12 @@
     "discord.js": "11.1.0",
     "request": "2.81.0"
   }
+},
+  "dependencies": {
+    "discord.js" : "11.0.0",
+    "ytdl-core" :  "github:fent/node-ytdl-core#master",
+    "node-opus" : "^0.2.1"
+  },
+  "author": "BDISTIN",
+  "license": "MIT"
 }
