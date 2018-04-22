@@ -1,7 +1,7 @@
 {
   "name": "test-Bot ",
   "description": "test-Bot By SpeedMC",
-  "version": "0.0.0",
+  "version": "5.7.1",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
