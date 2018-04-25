@@ -5,9 +5,10 @@ client.on('ready', () => {
 	client.user.setGame(` In Maintenance |Soon...`, "http://www.youtube.com/gg")
     console.log('I am ready!');
 });
-var UserBlocked = new Set();
+
 client.on("message", async message => {
-var prefix = "-";
+var UserBlocked = new Set();
+	var prefix = "-";
 var aoasm =[
     {q:"ما عاصمة **افغانستان**",a:"كبل"},
     {q:"ما عاصمة ** البانيا**",a:"تيران"},
