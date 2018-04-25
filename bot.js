@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const discord = new Discord.Client();
 const fs = require("fs");
-var UserBlocked = new Set(); // create a new set to save users id.
 client.on('ready', () => {
 	client.user.setGame(` In Maintenance |Soon...`, "http://www.youtube.com/gg")
     console.log('I am ready!');
 });
-
+var UserBlocked = new Set();
+client.on("message", async message => {
 var prefix = "-";
 var aoasm =[
     {q:"ما عاصمة **افغانستان**",a:"كبل"},
@@ -75,7 +75,6 @@ var aoasm =[
     
     
    ];
-   client.on("message", async message => {
     if(message.content == prefix+"عواصم"){
         if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
         UserBlocked.add(message.guild.id)
@@ -111,7 +110,7 @@ var aoasm =[
      });
   }
 });
-
+client.on("message", async message => {
 var prefix = "-";
 var fkk =[
         {f:"فكك بسم الله الرحمن الرحيم",k:"ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م"},
@@ -148,9 +147,6 @@ var fkk =[
 
 
    ];
-
-
-   client.on("message", async message => {
     if(message.content == prefix+"فكك"){
         if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
         UserBlocked.add(message.guild.id)
