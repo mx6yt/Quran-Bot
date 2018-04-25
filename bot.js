@@ -10,10 +10,8 @@ const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
 const prefix = '-';
 client.on('ready', function() {
 	console.log(`i am ready ${client.user.username}`);
+
 });
-
-
-
 
 /*
 ////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -48,16 +46,13 @@ var download = function(uri, filename, callback) {
 	});
 };
 
-
-
-
 client.on('message', function(message) {
 	const member = message.member;
 	const mess = message.content.toLowerCase();
 	const args = message.content.split(' ').slice(1).join(' ');
 
 	if (mess.startsWith(prefix + 'play')) {
-		if (!message.member.hasPermission('ADMINISTRATOR')) return message.reply(':x:');
+		if (!message.member.hasPermission('SEND_MESSAGE')) return message.reply(':x:');
 		if (!message.member.voiceChannel) return message.reply('**انت مو في روم صوتي**');
 		// if user is not insert the URL or song title
 		if (args.length == 0) {
@@ -73,7 +68,7 @@ client.on('message', function(message) {
 				fetchVideoInfo(id, function(err, videoInfo) {
 					if (err) throw new Error(err);
 					let play_info = new Discord.Rich
-										.setAuthor("أضيف إلى قائمة الانتظار", message.author.avatarURL)
+					.setAuthor("أضيف إلى قائمة الانتظار", message.author.avatarURL)
 					.setDescription(`**${videoInfo.title}**`)
 					.setColor("RANDOM")
 					.setFooter('Requested By:' + message.author.tag)
