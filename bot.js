@@ -1,235 +1,188 @@
 const Discord = require('discord.js');
 const discord = new Discord.Client();
-const Music = require('discord.js-musicbot-addon');
-const music = new Music(client, {
-    youtubeKey: 'AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4'
-  });
-const prefix = '-';
-client.on('ready', function() {
-	console.log(`i am ready ${client.user.username}`);
+const fs = require("fs");
+var UserBlocked = new Set(); // create a new set to save users id.
 
+var prefix = "-";
+var aoasm =[
+    {q:"ما عاصمة **افغانستان**",a:"كبل"},
+    {q:"ما عاصمة ** البانيا**",a:"تيران"},
+    {q:"ما عاصمة **الجزائر **",a:"الجزائر"},
+    {q:"ما عاصمة ** **",a:"الجزائر"},
+    {q:"ما عاصمة **اندورا لا فيلا **",a:"اندورا"},
+    {q:"ما عاصمة **انجولا**",a:"لواندا"},
+    {q:"ما عاصمة **انتيجوا وباربودا**",a:"سان جونز"},
+    {q:"ما عاصمة **الارجنتين**",a:"بوينس ايرس"},
+    {q:"ما عاصمة **ارمينيا**",a:"يريفان"},
+    {q:"ما عاصمة ** مصر**",a:"القاهرة"},
+    {q:"ما عاصمة ** استراليا**",a:"كانبرا"},
+    {q:"ما عاصمة **النمسا**",a:"فيينا"},
+    {q:"ما عاصمة ** اذربيجان**",a:"باكو"},
+    {q:"ما عاصمة **جزر البهاما**",a:"ناساو"},
+    {q:"ما عاصمة **البحرين**",a:"المنامة"},
+    {q:"ما عاصمة ** بنجلاديش**",a:"دكـا"},
+    {q:"ما عاصمة **باربادوس **",a:"بريدجتاون"},
+    {q:"ما عاصمة **بيلا روسيا**",a:"مينسك"},
+    {q:"ما عاصمة ** بلجيكا**",a:"بروكسل"},
+    {q:"ما عاصمة ** بيليز**",a:"بلوم بان"},
+    {q:"ما عاصمة ** بنين**",a:"بورتو نوفو"},
+    {q:"ما عاصمة ** بوتان**",a:"ثيمفو"},
+    {q:"ما عاصمة **بوليفيا **",a:"لاباز"},
+    {q:"ما عاصمة ** البوسنة والهرسك**",a:"سراييفو"},
+    {q:"ما عاصمة ** بوتسوانا**",a:"جابورون"},
+    {q:"ما عاصمة ** البرازيل**",a:"برازيليا"},
+    {q:"ما عاصمة ** بروناى**",a:"بندر سرى بيجاوان"},
+    {q:"ما عاصمة ** بلغاريا**",a:"صوفيا"},
+    {q:"ما عاصمة ** بوركينا فاسو**",a:"واجادوجو"},
+    {q:"ما عاصمة **بوروندى **",a:"بوجومبورا"},
+    {q:"ما عاصمة **كمبوديا **",a:"بنوم بنـه"},
+    {q:"ما عاصمة ** الكاميرون**",a:"ياوندى"},
+    {q:"ما عاصمة ** كندا**",a:"اوتاوا"},
+    {q:"ما عاصمة ** الرأس الاخضر**",a:"برايا"},
+    {q:"ما عاصمة **تشاد **",a:"نجامينا"},
+    {q:"ما عاصمة ** شيلى**",a:"سانتياجو"},
+    {q:"ما عاصمة **الصين **",a:"بكين"},
+    {q:"ما عاصمة ** **",a:"مورونى"},
+    {q:"ما عاصمة **كوستاريكا **",a:"سان خوسيه"},
+    {q:"ما عاصمة ** كوت ديفوار**",a:"ابيدجان"},
+    {q:"ما عاصمة **كرواتيا **",a:"زغرب"},
+    {q:"ما عاصمة ** كوبا**",a:"هافانا"},
+    {q:"ما عاصمة ** قبرص**",a:" "},
+    {q:"ما عاصمة ** جمهورية التشيك**",a:"براغ"},
+    {q:"ما عاصمة **الدنمارك **",a:"كوبنهاجن"},
+    {q:"ما عاصمة ** جيبوتى**",a:"جيبوتى"},
+    {q:"ما عاصمة ** دومينيكا**",a:"روسيو"},
+    {q:"ما عاصمة **الدومينيكان **",a:"سان دومينجو"},
+    {q:"ما عاصمة **تيمور الشرقية **",a:"ديلى"},
+    {q:"ما عاصمة **قطر  **",a:"الدوحة"},
+    {q:"ما عاصمة **السعودية  **",a:"الرياض"},
+    {q:"ما عاصمة **سوريا  **",a:"دمشق"},
+    {q:"ما عاصمة **تركيا  **",a:"انقرة"},
+    {q:"ما عاصمة **العراق  **",a:"بغداد"},
+    {q:"ما عاصمة **البنان  **",a:"بيروت"},
+    {q:"ما عاصمة **فلسطين  **",a:"القدس"},
+    {q:"ما عاصمة **امريكا  **",a:"واشنطن"},
+    {q:"ما عاصمة **الاردن  **",a:"عمان"},    
+    {q:"ما عاصمة **السودان  **",a:"خرطوم"},
+    {q:"ما عاصمة **المانيا  **",a:"برلين"},
+    {q:"ما عاصمة **كندا  **",a:"اوتاوا"},
+    {q:"ما عاصمة **البرازيل  **",a:"برازيليا"},
+    
+    
+    
+   ];
+   client.on("message", async message => {
+    if(message.content == prefix+"عواصم"){
+        if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
+        UserBlocked.add(message.guild.id)
+        var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
+        let embed = new Discord.RichEmbed()
+        .setTitle('سؤال عواصم')
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor("RANDOM")
+        .setDescription(ask.q);
+        message.channel.sendEmbed(embed).then(msg=> msg.delete(20000))
+        const msgs = await message.channel.awaitMessages(msg => msg.author.id !== client.user.id ,{maxMatches:1,time:10000});
+            UserBlocked.delete(message.guild.id)
+        msgs.forEach(result => {
+           if(result.author.id == client.user.id) return;
+           if(result.content == "عاصمة") return
+           if(result.content == ask.a){
+
+             let embeds = new Discord.RichEmbed()
+             .setTitle(':white_check_mark: اجابة صحيحة')
+             .setAuthor(message.author.username, message.author.avatarURL)
+             .setColor("RANDOM")
+             .setDescription(`**${result.author.username}** الإجابة صحيحة`);
+                message.channel.sendEmbed(embeds);                return;
+           } else {
+
+                                  var embedx = new Discord.RichEmbed()
+                .setTitle(':x:خطاء')
+                .setAuthor(message.author.username, message.author.avatarURL)
+                .setColor("RANDOM")
+                .setDescription(`**${result.author.username}** الإجابة خاطئة`);
+                message.channel.sendEmbed(embedx);
+           }
+     });
+  }
 });
 
-/*
-////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\
-*/
-var servers = [];
-var queue = [];
-var guilds = [];
-var queueNames = [];
-var isPlaying = false;
-var dispatcher = null;
-var voiceChannel = null;
-var skipReq = 0;
-var skippers = [];
-var now_playing = [];
-/*
-\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////
-*/
-client.on('ready', () => {});
-console.log("Logged")
-var download = function(uri, filename, callback) {
-	request.head(uri, function(err, res, body) {
-		console.log('content-type:', res.headers['content-type']);
-		console.log('content-length:', res.headers['content-length']);
-
-		request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-	});
-};
-
-client.on('message', function(message) {
-	const member = message.member;
-	const mess = message.content.toLowerCase();
-	const args = message.content.split(' ').slice(1).join(' ');
-
-	if (mess.startsWith(prefix + 'play')) {
-		if (!message.member.hasPermission('SEND_MESSAGE')) return message.reply(':x:');
-		if (!message.member.voiceChannel) return message.reply('**انت مو في روم صوتي**');
-		// if user is not insert the URL or song title
-		if (args.length == 0) {
-			let play_info = new Discord.RichEmbed()
-				.setAuthor(client.user.username, client.user.avatarURL)
-				.setDescription('**قم بوضع الرابط , او  الاسم**')
-			message.channel.sendEmbed(play_info)
-			return;
-		}
-		if (queue.length > 0 || isPlaying) {
-			getID(args, function(id) {
-				add_to_queue(id);
-				fetchVideoInfo(id, function(err, videoInfo) {
-					if (err) throw new Error(err);
-					let play_info = new Discord.Rich
-					.setAuthor("أضيف إلى قائمة الانتظار", message.author.avatarURL)
-					.setDescription(`**${videoInfo.title}**`)
-					.setColor("RANDOM")
-					.setFooter('Requested By:' + message.author.tag)
-					.setImage(videoInfo.thumbnailUrl)
-				//.setDescription('?')
-				message.channel.sendEmbed(play_info);
-				queueNames.push(videoInfo.title);
-				// let now_playing = videoInfo.title;
-				now_playing.push(videoInfo.title);
-
-			});
-		});
-	}
-	else {
-
-		isPlaying = true;
-		getID(args, function(id) {
-			queue.push('placeholder');
-			playMusic(id, message);
-			fetchVideoInfo(id, function(err, videoInfo) {
-				if (err) throw new Error(err);
-				let play_info = new Discord.RichEmbed()
-					.setAuthor(`Added To Queue`, message.author.avatarURL)
-					.setDescription(`**${videoInfo.title}**`)
-					.setColor("RANDOM")
-					.setFooter('بطلب من: ' + message.author.tag)
-					.setThumbnail(videoInfo.thumbnailUrl)
-				//.setDescription('?')
-				message.channel.sendEmbed(play_info);
-			});
-		});
-	}
-}
-else if (mess.startsWith(prefix + 'skip')) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
-	message.reply(':gear: **تم التخطي**').then(() => {
-		skip_song(message);
-		var server = server = servers[message.guild.id];
-		if (message.guild.voiceConnection) message.guild.voiceConnection.end();
-	});
-}
-else if (message.content.startsWith(prefix + 'volume')) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
-	// console.log(args)
-	if (args > 100) return message.reply(':x: **100**');
-	if (args < 1) return message.reply(":x: **1**");
-	dispatcher.setVolume(1 * args / 50);
-	message.channel.sendMessage(`Volume Updated To: **${dispatcher.volume*50}**`);
-}
-else if (mess.startsWith(prefix + 'pause')) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
-	message.reply(':gear: **تم الايقاف مؤقت**').then(() => {
-		dispatcher.pause();
-	});
-}
-else if (mess.startsWith(prefix + 'unpause')) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
-	message.reply(':gear: **تم اعاده التشغيل**').then(() => {
-		dispatcher.resume();
-	});
-}
-else if (mess.startsWith(prefix + 'stop')) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
-	message.reply(':name_badge: **تم الايقاف**');
-	var server = server = servers[message.guild.id];
-	if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-}
-else if (mess.startsWith(prefix + 'join')) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا ,انت غير موجود في روم صوتي**');
-	message.member.voiceChannel.join().then(message.react('✅'));
-}
-else if (mess.startsWith(prefix + 'play')) {
-	getID(args, function(id) {
-		add_to_queue(id);
-		fetchVideoInfo(id, function(err, videoInfo) {
-			if (err) throw new Error(err);
-			if (!message.member.voiceChannel) return message.reply('**عفوا, انت غير موجود في روم صوتي**');
-			if (isPlaying == false) return message.reply(':x:');
-			let playing_now_info = new Discord.RichEmbed()
-				.setAuthor(client.user.username, client.user.avatarURL)
-				.setDescription(`**${videoInfo.title}**`)
-				.setColor("RANDOM")
-				.setFooter('Requested By:' + message.author.tag)
-				.setImage(videoInfo.thumbnailUrl)
-			message.channel.sendEmbed(playing_now_info);
-			queueNames.push(videoInfo.title);
-			// let now_playing = videoInfo.title;
-			now_playing.push(videoInfo.title);
-
-		});
-
-	});
-}
-
-function skip_song(message) {
-	if (!message.member.voiceChannel) return message.reply('**عفوا, انت غير موجود في روم صوتي**');
-	dispatcher.end();
-}
-
-function playMusic(id, message) {
-	voiceChannel = message.member.voiceChannel;
+var prefix = "-";
+var fkk =[
+        {f:"فكك بسم الله الرحمن الرحيم",k:"ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م"},
+        {f:"فكك باص",k:"ب ا ص"},
+        {f:"فكك عربة ",k:"ع ر ب ة"},
+        {f:"فكك سيارة",k:"س ي ا ر ة"},
+        {f:"فكك سيرفرنا احلى سيرفر",k:"س ي ر ف ر ن ا ا ح ل ى س ي ر ف ر"},
+        {f:"فكك العنود ",k:"ا ل ع ن و د"},
+        {f:"فكك المستتكعكبتيه",k:"ا ل م س ت ت ك ع ك ب ت ي ه"},
+        {f:"فكك دحوم",k:"د ح و م"},
+        {f:"فكك اونرنا احلى اونر",k:"ا و ن ر ن ا ا ح ل ى ا و ن ر"},
+        {f:"فكك الحياة حلوة",k:"ا ل ح ي ا ة ح ل و ة"},
+        {f:"فكك كازخستان ",k:"ك ا ز خ س ت ا ن"},
+        {f:"لحم الحمام حلال ولحم الحمار حرام ",k:"ل ح م ا ل ح م ا م ح ل ا ل و ل ح م ا ل ح م ا ر ح ر ا م"},
+        {f:"فكك استونيا ",k:"ا س ت و ن ي ا"},
+        {f:"فكك لقمة وجغمه ",k:"ل ق م ة و ج غ م ه"},
+        {f:"فكك زنديق  ",k:"ز ن د ي ق"},
+        {f:"فكك استراليا ",k:"ا س ت ر ا ل ي ا"},
+        {f:"فكك سوريا ",k:"س و ر ي ا"},
+        {f:"فكك الاردن ",k:"ا ل ا ر د ن"},
+        {f:"فكك طماطم ",k:"ط م ا ط م"},
+        {f:"فكك سارة ",k:"س ا ر ة"},
+        {f:"فكك دراجون ",k:"د ر ا ج و ن"},
+        {f:"فكك سيرفر ",k:"س ي ر ف ر"},
+        {n:"فكك الجبل",m:"ا ل ج ب ل"},
+        {n:"فكك هضبة",m:"ه ض ب ة"},
+        {n:"فكك خواطر",m:"خ و ا ط ر"},
+        {n:"فكك ارحبو",m:"ا ر ح ب و"},
+        {n:"فكك اطنخ سيرفر",m:"ا ط ن خ س ي ف ر"},
+        {n:"فكك احبك",m:"ا ح ب ك"},
+        {n:"فكك سبرايز",m:"س ب ر ا ي ز"},
+        {n:"فكك ولي على أمتك",m:"و ل ي ع ل ى أ م ت ك"},
 
 
-	voiceChannel.join().then(function(connectoin) {
-		let stream = ytdl('https://www.youtube.com/watch?v=' + id, {
-			filter: 'audioonly'
-		});
-		skipReq = 0;
-		skippers = [];
 
-		dispatcher = connectoin.playStream(stream);
-		dispatcher.on('end', function() {
-			skipReq = 0;
-			skippers = [];
-			queue.shift();
-			queueNames.shift();
-			if (queue.length === 0) {
-				queue = [];
-				queueNames = [];
-				isPlaying = false;
-			}
-			else {
-				setTimeout(function() {
-					playMusic(queue[0], message);
-				}, 500);
-			}
-		});
-	});
-}
-
-function getID(str, cb) {
-	if (isYoutube(str)) {
-		cb(getYoutubeID(str));
-	}
-	else {
-		search_video(str, function(id) {
-			cb(id);
-		});
-	}
-}
-
-function add_to_queue(strID) {
-	if (isYoutube(strID)) {
-		queue.push(getYoutubeID(strID));
-	}
-	else {
-		queue.push(strID);
-	}
-}
-
-function search_video(query, cb) {
-	request("https://www.googleapis.com/youtube/v3/search?part=id&type=video&q=" + encodeURIComponent(query) + "&key=" + yt_api_key, function(error, response, body) {
-		var json = JSON.parse(body);
-		cb(json.items[0].id.videoId);
-	});
-}
+   ];
 
 
-function isYoutube(str) {
-	return str.toLowerCase().indexOf('youtube.com') > -1;
-}
+   client.on("message", async message => {
+    if(message.content == prefix+"فكك"){
+        if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
+        UserBlocked.add(message.guild.id)
+        var ask = fkk[Math.floor(Math.random() * fkk.length)];
+        let embed = new Discord.RichEmbed()
+        .setTitle('لعبة فكك')
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor("RANDOM")
+        .setDescription(ask.f);
+        message.channel.sendEmbed(embed).then(msg=> msg.delete(200000))
+        const msgs = await message.channel.awaitMessages(msg => msg.author.id !== client.user.id ,{maxMatches:1,time:100000});
+            UserBlocked.delete(message.guild.id)
+        msgs.forEach(result => {
+           if(result.author.id == client.user.id) return;
+           if(result.content == "فكك") return
+           if(result.content == ask.k){
+
+             let embeds = new Discord.RichEmbed()
+             .setTitle(':white_check_mark: اجابة صحيحة')
+             .setAuthor(message.author.username, message.author.avatarURL)
+             .setColor("RANDOM")
+             .setDescription(`**${result.author.username}** الإجابة صحيحة`);
+                message.channel.sendEmbed(embeds);                return;
+           } else {
+
+                               var embedx = new Discord.RichEmbed()
+             .setTitle(':x:خطاء')
+             .setAuthor(message.author.username, message.author.avatarURL)
+             .setColor("RANDOM")
+             .setDescription(`**${result.author.username}** الإجابة خاطئة`);
+
+                message.channel.sendEmbed(embedx);
+           }
+     });
+  }
 });
-
-
 					
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
