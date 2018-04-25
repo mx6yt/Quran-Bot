@@ -2,6 +2,10 @@ const Discord = require('discord.js');
 const discord = new Discord.Client();
 const fs = require("fs");
 var UserBlocked = new Set(); // create a new set to save users id.
+client.on('ready', () => {
+	client.user.setGame(` In Maintenance |Soon...`, "http://www.youtube.com/gg")
+    console.log('I am ready!');
+});
 
 var prefix = "-";
 var aoasm =[
