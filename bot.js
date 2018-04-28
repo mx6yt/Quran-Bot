@@ -1,12 +1,12 @@
 const Music = require('discord.js-musicbot-addon');
 const music = new Music(client, {
-    prefix: "-", // Prefix for the commands.
+    prefix: "-", 
     youtubeKey: 'AIzaSyApvbcgvYRGulf1I1Ffjfhr2K-S6TX0e9w',
-    global: false,            // Non-server-specific queues.
-    maxQueueSize: 50,        // Maximum queue size of 25.
-    playCmd: 'p',        // Sets the name for the 'play' command.
+    global: false,           
+    maxQueueSize: 50,        
+    playCmd: 'p',        
     playAlts: ["play", 'paly'],
-    volumeCmd: 'vol',     // Sets the name for the 'volume' command.
+    volumeCmd: 'vol',     
     thumbnailType: 'high',
     leaveCmd: 'stop',      // Sets the name for the 'leave' command.
     anyoneCanSkip: true,
