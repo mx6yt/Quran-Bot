@@ -10,7 +10,7 @@ const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
 const prefix = '-';
 const discord_token = "NDIyMDM3NzQwNTkxMzgyNTI4.DYV8zA.6vBJjF7Op9T_bH_YOwRMXqwh9vc";
 client.login(discord_token);
-client.on('ready', function() {
+client.on('ready', function() { 
 	console.log(`i am ready ${client.user.username}`);
 });
 
