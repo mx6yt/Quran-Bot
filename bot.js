@@ -25,5 +25,8 @@ const music = new Music(client, {
     loopCmd: 'loop',
     enableQueueStat: true,
   });
+client.on('ready', () => {
+	console.log('I am ready!'); 
+  })
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
