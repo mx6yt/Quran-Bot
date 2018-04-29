@@ -1,6 +1,8 @@
 const Music = require('discord.js-musicbot-addon');
+const Discord = require('discord.js');
+const client = new Discord.Client(); 
 const music = new Music(client, {
-    prefix: ".", // Prefix for the commands.
+    prefix: "-", // Prefix for the commands.
     youtubeKey: 'AIzaSyApvbcgvYRGulf1I1Ffjfhr2K-S6TX0e9w',
     global: false,            // Non-server-specific queues.
     maxQueueSize: 50,        // Maximum queue size of 25.
@@ -23,3 +25,5 @@ const music = new Music(client, {
     loopCmd: 'loop',
     enableQueueStat: true,
   });
+// THIS  MUST  BE  THIS  WAY
+client.login(process.env.BOT_TOKEN);
