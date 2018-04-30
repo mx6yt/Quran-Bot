@@ -1,11 +1,9 @@
 const Discord = require('discord.js');
-const client = new Discord.Client(); 
-var roles = {}; 
- 
+const client = new Discord.Client();  
 
- 
 client.on("message", message => {
 	var prefix = '*';
+	var roles = {}; 
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
