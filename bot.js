@@ -39,6 +39,33 @@ client.on('message', message => {
    });
 
 client.on('message', message => {
+    if (message.content === '*help') {
+   var embed = new Discord.RichEmbed()
+        .setTitle('تم ارسال جميع الاوامر على الخاص ,, :e_mail: ')
+        .setColor('RED')
+       message.channel.sendEmbed(embed)
+    }
+});
+
+client.on('ready', function(){	
+    var ms = 40000 ;	
+    var setGame = ['*inv','*help'];	
+    var i = -1;	
+    var j = 0;	
+    setInterval(function (){	
+        if( i == -1 ){	
+j = 1;	
+       }	
+        if( i == (setGame.length)-1 ){	
+            j = -1;	
+      }	
+       i = i+j;	
+        client.user.setGame(setGame[i],`http://www.youtube.com/gg`);	
+}, ms);	
+	
+});
+
+client.on('message', message => {
 	var prefix ="*";
 if (message.content.startsWith(prefix + 'help')) {
   var embed = new Discord.RichEmbed() 
