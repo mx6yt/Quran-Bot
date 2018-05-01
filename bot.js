@@ -1,52 +1,60 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();  
+const Music = require('discord.js-musicbot-addon');
+const client = new Discord.Client(); 
+const music = new Music(client, {
+    prefix: "*", 
+    youtubeKey: 'AIzaSyApvbcgvYRGulf1I1Ffjfhr2K-S6TX0e9w',
+    global: false,
+    maxQueueSize: 50,        // Maximum queue size of 25.
+    playCmd: 'play',        // Sets the name for the 'play' command.
+    playAlts: ["play", 'paly'],
+    volumeCmd: 'vol',     // Sets the name for the 'volume' command.
+    thumbnailType: 'high',
+    leaveCmd: 'leave',      // Sets the name for the 'leave' command.
+    anyoneCanSkip: true,
+    disableLoop: false,
+    searchCmd: 'search',
+    requesterName: true,
+    inlineEmbeds: true,     
+    queueCmd: 'queue',
+    queueAlts: ['queue', 'queueue'],
+    pauseCmd: 'pause',
+    resumeCmd: 'resume',
+    skipCmd: 'skip',
+    skipAlts: ["skip", "skipp"],
+    loopCmd: 'loop',
+    enableQueueStat: true,
+  });
 
-client.on("message", message => {
-	var prefix = '*';
-	var roles = {}; 
-	var args = message.content.split(' ').slice(1); 
-	var msg = message.content.toLowerCase();
-	if( !message.guild ) return;
-	if( !msg.startsWith( prefix + 'role' ) ) return;
-	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
-		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
-		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
-		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
-		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
-			message.mentions.members.first().removeRole( role1 );
-			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
-		}
-		if( args[0].toLowerCase() == "all" ){
-			message.guild.members.forEach(m=>m.removeRole( role1 ))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
-		} else if( args[0].toLowerCase() == "bots" ){
-			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
-		} else if( args[0].toLowerCase() == "humans" ){
-			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
-		} 	
-	} else {
-		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
-		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
-		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
-		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
-			message.mentions.members.first().addRole( role1 );
-			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
-		}
-		if( args[0].toLowerCase() == "all" ){
-			message.guild.members.forEach(m=>m.addRole( role1 ))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
-		} else if( args[0].toLowerCase() == "bots" ){
-			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
-		} else if( args[0].toLowerCase() == "humans" ){
-			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
-		} 
-	} 
+client.on('message', message => {
+	var prefix ="-";
+if (message.content.startsWith(prefix + 'help')) {
+  var embed = new Discord.RichEmbed() 
+      .setColor("#ffff00")
+      .setThumbnail(message.author.avatarURL)
+      .setDescription(`
+● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
+        **اوامر تشغيل القران**  
+
+-play <name> | لتشغيل القران
+
+-leave | لتوقيف القران وخروج البوت من الرووم 
+
+-skip | لتخطي القران
+ 
+ -vol <number> | لتغيير الصوت 
+
+ -pause | ايقاف بشكل موقت
+
+ -resume | تكميل القران 
+
+ -loop | لاعادة القران بوحدها 
+
+● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
+`)
+  message.author.sendEmbed(embed)
+
+}
 });
 
 client.on('ready', () => {
