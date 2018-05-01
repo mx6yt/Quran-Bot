@@ -27,7 +27,7 @@ const music = new Music(client, {
   });
 
 client.on('message', message => {
-	var prefix ="-";
+	var prefix ="*";
 if (message.content.startsWith(prefix + 'help')) {
   var embed = new Discord.RichEmbed() 
       .setColor("#ffff00")
@@ -50,6 +50,8 @@ if (message.content.startsWith(prefix + 'help')) {
 
  -loop | لاعادة القران بوحدها 
 
+● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
+المرجو عدم تشغيل الموسيقى في هذا البوت
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 `)
   message.author.sendEmbed(embed)
