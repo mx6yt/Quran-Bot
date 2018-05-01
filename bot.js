@@ -27,6 +27,17 @@ const music = new Music(client, {
   });
 
 client.on('message', message => {
+  if(message.content === "Q**bot") {
+      const embed = new Discord.RichEmbed()
+      .setColor("#00FFFF")
+      .setDescription(`**Servers**🌐 **__${client.guilds.size}__**
+**Users**👥 **__${client.users.size}__**
+**Channels**📚 **__${client.channels.size}__** `)
+             message.channel.sendEmbed(embed);
+         }
+});
+
+client.on('message', message => {
         if (message.content === "*inv") {
             if(!message.channel.guild) return;
         let embed = new Discord.RichEmbed()
