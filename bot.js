@@ -28,7 +28,7 @@ const music = new Music(client, {
 
 var prefix = ".";
 var aoasm =[
-    {q:"Quran **ما أول ما نزل من التوراة ؟**",a:"بسم الله الرحمان الرحيم"},
+    {q:"**ما أول ما نزل من التوراة ؟**",a:"بسم الله الرحمان الرحيم"},
 
     
     
@@ -41,7 +41,7 @@ var aoasm =[
         UserBlocked.add(message.guild.id)
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
         let embed = new Discord.RichEmbed()
-        .setTitle('اسئلة')
+        .setTitle('عاصمة')
         .setAuthor(message.author.username, message.author.avatarURL)
         .setColor("RANDOM")
         .setDescription(ask.q);
@@ -50,7 +50,7 @@ var aoasm =[
             UserBlocked.delete(message.guild.id)
         msgs.forEach(result => {
            if(result.author.id == client.user.id) return;
-           if(result.content == "اسئلة") return
+           if(result.content == "عاصمة") return
            if(result.content == ask.a){
 
              let embeds = new Discord.RichEmbed()
