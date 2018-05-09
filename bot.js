@@ -26,7 +26,6 @@ const music = new Music(client, {
     enableQueueStat: true,
   });
 
-var prefix = ".";
 var aoasm =[
     {q:"**ما أول ما نزل من التوراة ؟**",a:"بسم الله الرحمان الرحيم"},
 
