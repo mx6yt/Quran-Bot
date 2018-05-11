@@ -27,14 +27,14 @@ const music = new Music(client, {
   });
 
 var aoasm =[
-    {q:"**ما أول ما نزل من التوراة ؟**",a:"بسم الله الرحمان الرحيم"},
+    {q:"Quran **ما أول ما نزل من التوراة**",a:"بسم الله الرحمان الرحيم"},
 
     
     
     
    ];
    client.on("message", async message => {
-	   var prefix = "*";
+	   var prefix = ".";
     if(message.content == prefix+"اسئلة"){
 
         UserBlocked.add(message.guild.id)
@@ -68,9 +68,7 @@ var aoasm =[
                 message.channel.sendEmbed(embedx);
            }
      });
-  }
-});
-
+	    
 client.on('message', message => {
   if(message.content === "Q**bot") {
       const embed = new Discord.RichEmbed()
