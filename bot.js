@@ -34,7 +34,7 @@ var aoasm =[
     
    ];
    client.on("message", async message => {
-	   var prefix = ".";
+	   var prefix = "*";
     if(message.content == prefix+"اسئلة"){
 
         UserBlocked.add(message.guild.id)
