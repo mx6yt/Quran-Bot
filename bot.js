@@ -101,15 +101,6 @@ if(!message.channel.guild) return;
     }
 });
 
-
-client.on("guildCreate", guild => {
-client.channels.get("442346379742937088").send(`**Speed Bot** has been **added** ❤ from this server **(${guild.name})** , Server Owner 👑 **(${guild.owner.user.username})**`)
-});
-
-client.on("guildDelete", guild => {
-client.channels.get("442346379742937088").send(`**Speed Bot** has been **removed** 😔 from this server **(${guild.name})** , Server Owner 👑 **(${guild.owner.user.username})**`)
-});
-
 client.on('message', message => {
         if (message.content === "*inv") {
             if(!message.channel.guild) return;
@@ -145,7 +136,7 @@ client.on('message', message => {
 
 client.on('ready', function(){	
     var ms = 40000 ;	
-    var setGame = ['*inv','*help'];	
+    var setGame = ['*inv','*help','Ramdan Karim'];	
     var i = -1;	
     var j = 0;	
     setInterval(function (){	
