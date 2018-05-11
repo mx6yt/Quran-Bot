@@ -174,6 +174,8 @@ if (message.content.startsWith(prefix + 'help')) {
 
 *support | اذا لقيت اي غلط ادخل السيرفر لحتى نصلحو 
 
+https://discord.gg/EvwSx6p
+
 جاري اضافة بعض الاشياء
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
         **اوامر تشغيل القران**  
