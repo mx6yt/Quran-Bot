@@ -27,7 +27,7 @@ const music = new Music(client, {
   });
 
 var aoasm =[
-    {q:"Quran **ما أول ما نزل من التوراة**",a:"بسم الله الرحمان الرحيم"},
+    {q:"Quran **ما أول ما نزل من التوراة**",a:"بسم"},
 
     
     
@@ -49,7 +49,7 @@ var aoasm =[
             UserBlocked.delete(message.guild.id)
         msgs.forEach(result => {
            if(result.author.id == client.user.id) return;
-           if(result.content == "عاصمة") return
+           if(result.content == "اسئلة") return
            if(result.content == ask.a){
 
              let embeds = new Discord.RichEmbed()
