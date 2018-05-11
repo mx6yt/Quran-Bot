@@ -68,6 +68,8 @@ var aoasm =[
                 message.channel.sendEmbed(embedx);
            }
      });
+	     }
+     });
 	    
 client.on('message', message => {
   if(message.content === "Q**bot") {
