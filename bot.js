@@ -25,7 +25,16 @@ const music = new Music(client, {
     loopCmd: 'loop',
     enableQueueStat: true,
   });
-
+client.on('guildCreate', guild => {
+  client.channels.get("439568111897935892").send(`**Woops new server ✅
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__**`)
+});
+client.on("guildDelete", guild => {
+ client.channels.get("439568111897935892").send(`**Rmoved From server :x:
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__**`)
+});
 	    
 client.on('message', message => {
   if(message.content === "Q**bot") {
