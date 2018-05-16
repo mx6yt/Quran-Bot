@@ -26,12 +26,12 @@ const music = new Music(client, {
     enableQueueStat: true,
   });
 client.on('guildCreate', guild => {
-  client.channels.get("439568111897935892").send(`**Woops new server ✅
+  client.channels.get("446261667819421708").send(`**Woops new server ✅
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__**`)
 });
 client.on("guildDelete", guild => {
- client.channels.get("439568111897935892").send(`**Rmoved From server :x:
+ client.channels.get("446261667819421708").send(`**Rmoved From server :x:
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__**`)
 });
