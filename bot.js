@@ -10,17 +10,6 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 
 
-
-
-
-
-
-
-
-
-
-
-
 client.on('warn', console.warn);
 
 client.on('error', console.error);
@@ -212,7 +201,7 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`بدء تشغيل: **${song.title}**`);
 }
-});
+
 
 client.on('guildCreate', guild => {
   client.channels.get("446261667819421708").send(`**Woops new server ✅
