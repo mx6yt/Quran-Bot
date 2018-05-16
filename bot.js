@@ -323,7 +323,7 @@ client.on('message', message => {
 
 client.on('ready', function(){	
     var ms = 40000 ;	
-    var setGame = ['*inv','*help','Ramdan Karim'];	
+    var setGame = ['*help','Ramdan Karim'];	
     var i = -1;	
     var j = 0;	
     setInterval(function (){	
@@ -360,17 +360,19 @@ https://discord.gg/EvwSx6p
 
 *play <name> | لتشغيل القران
 
-*leave | لتوقيف القران وخروج البوت من الرووم 
+*stop | لتوقيف القران وخروج البوت من الرووم 
 
 *skip | لتخطي القران
  
-*vol number <1-200> | لتغيير الصوت 
+*vol number | لتغيير الصوت 
 
 *pause | ايقاف بشكل موقت
 
 *resume | تكميل القران 
 
-*loop | لاعادة القران بوحدها 
+*np | لمعرف اي سورة مشتغلة
+
+*queue | لمعرفة السور الاخرى التي طلبتها 
 
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 المرجو عدم تشغيل الموسيقى في هذا البوت
