@@ -18,37 +18,6 @@ const queue = new Map();
 
 
 
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`KingMas`,"http://twitch.tv/S-F")
-  console.log('')
-  console.log('')
-  console.log('╔[═════════════════════════════════════════════════════════════════]╗')
-  console.log(`[Start] ${new Date()}`);
-  console.log('╚[═════════════════════════════════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════════════════════════════]╗');
-  console.log(`Logged in as * [ " ${client.user.username} " ]`);
-  console.log('')
-  console.log('Informations :')
-  console.log('')
-  console.log(`servers! [ " ${client.guilds.size} " ]`);
-  console.log(`Users! [ " ${client.users.size} " ]`);
-  console.log(`channels! [ " ${client.channels.size} " ]`);
-  console.log('╚[════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════]╗')
-  console.log(' Bot Is Online')
-  console.log('╚[════════════]╝')
-  console.log('')
-  console.log('')
-});
-
-
-
-
-
 client.on('warn', console.warn);
 
 client.on('error', console.error);
@@ -126,7 +95,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 			}
 			return handleVideo(video, msg, voiceChannel);
 		}
-	} else if (command === `s`) {
+	} else if (command === `skip`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
 		serverQueue.connection.dispatcher.end('Skip command has been used!');
