@@ -323,7 +323,7 @@ client.on('message', message => {
 
 client.on('ready', function(){	
     var ms = 40000 ;	
-    var setGame = ['*help','Ramdan Karim'];	
+    var setGame = ['*help','*inv'];	
     var i = -1;	
     var j = 0;	
     setInterval(function (){	
