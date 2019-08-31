@@ -287,6 +287,22 @@ if(!message.channel.guild) return;
          message.channel.sendEmbed(Embed11)
     }
 });
+const Discord = require('discord.js');
+const bot = new Discord.Client();
+var bm = message.content.toLowerCase()
+
+bot.on('message',(message) => {
+
+     if (bm == "pray") {
+    var VC = message.member.voiceChannel;
+    if (!VC)
+        return message.reply("You are not in the church my son.")
+VC.join()
+    .then(connection => {
+        const dispatcher = connection.playFile('d:/mp3.MP3');
+        dispatcher.on("end", end => {VC.leave()});
+    })
+    .catch(console.error); )
 
 client.on('message', message => {
         if (message.content === "*inv") {
